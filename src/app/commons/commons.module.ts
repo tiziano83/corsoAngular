@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GuestlistComponent } from './guestlist/guestlist.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { SimpleGuestComponent } from './simple-guest/simple-guest.component';
 import {MatButtonModule, MatCardModule, MatDialogModule} from "@angular/material";
 import {FlexLayoutModule} from "@angular/flex-layout";
@@ -32,7 +32,8 @@ const components = [
     FlexLayoutModule,
     DirectivesModule,
     MatButtonModule,
-    PipesModule
+    PipesModule,
+    ReactiveFormsModule
   ],
   exports:[...components],
   declarations: [...components],

@@ -104,7 +104,7 @@ export class AppComponent {
 
   openDialog(): void {
     let dialogRef = this.dialog.open(SimpleDialogComponent, {
-      width: '250px',
+      width: '70%',
      // data: { name: this.name, animal: this.animal }
     });
 

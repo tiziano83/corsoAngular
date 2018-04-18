@@ -1,3 +1,31 @@
-<p>
-  dd-guest-form works!
-</p>
+<h1>Add Guest</h1>
+<form [formGroup]="guestForm" (ngSubmit)="addGuest(guestForm)">
+  <input
+    formControlName="firtsName"
+    name="firtsName"
+    id="firtsName"/>
+
+
+
+  <input
+
+    name="lastName"
+    id="lastName"
+    required
+    formControlName="lastName">
+
+
+  <select
+
+    name="company"
+    id="company"
+    formControlName="company">
+    <option   value=""></option>
+    <option *ngFor="let company of companies" [value]="company">{{company}}</option>
+  </select>
+
+  <button type="submit" [disabled]="!guestForm.valid">Salva</button>
+
+</form>
+
+{{guestForm.value | json}}
