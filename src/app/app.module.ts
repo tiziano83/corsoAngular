@@ -7,6 +7,8 @@ import {CommonsModule} from "./commons/commons.module";
 import {ServicesModule} from "./services/services.module";
 import {HttpClient} from "@angular/common/http";
 import {PipesModule} from "./pipes/pipes.module";
+import {MatDialogModule} from "@angular/material";
+import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-browser/animations";
 
 
 
@@ -22,8 +24,10 @@ import {PipesModule} from "./pipes/pipes.module";
     BrowserModule,
     CommonsModule,
     ServicesModule,
-    PipesModule
-
+    PipesModule,
+    MatDialogModule,
+    BrowserAnimationsModule,
+    NoopAnimationsModule
 
   ],
   providers: [],

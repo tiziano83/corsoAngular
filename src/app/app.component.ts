@@ -3,6 +3,8 @@ import {reject} from "q";
 import {iGuest} from "./models/iguest.interface";
 import {GuestService} from "./services/guest.service";
 import 'rxjs/add/operator/do';
+import {SimpleDialogComponent} from "./commons/simple-dialog/simple-dialog.component";
+import {MatDialog} from "@angular/material";
 
 @Component({
   selector: 'app-root',
@@ -23,7 +25,7 @@ export class AppComponent {
     birthdate: new Date('05/06/1983'),
   };
 
-  constructor(private readonly guestService: GuestService) {
+  constructor(private readonly guestService: GuestService,private dialog : MatDialog) {
     const hi = 'HI';
     this.title = `${hi} ${this.title}`;
     this.printlet();
@@ -70,7 +72,8 @@ export class AppComponent {
   }
 
   onAddGuestListener(args: string) {
-
+    this.openDialog();
+/*
     //alert(`add guest ${args}`);
     const guest: iGuest = {
       //  id : this.fakeGuest.length+1,
@@ -82,6 +85,8 @@ export class AppComponent {
   }
 
    this.guestService.post(guest).subscribe((res)=> {this.guests = res});
+
+   */
   }
   onDeleteGuestListener(args: string) {
     this.guestService.deleteById(args).subscribe((res)=> {this.guests = res});
@@ -93,4 +98,19 @@ export class AppComponent {
    * si risale tramite gli emitter dal componente del bottone fino all'app component
    * in modo che l'unico ad utilizzare il servizio è l'app component
    */
+
+
+
+
+  openDialog(): void {
+    let dialogRef = this.dialog.open(SimpleDialogComponent, {
+      width: '250px',
+     // data: { name: this.name, animal: this.animal }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      //this.animal = result;
+    });
+  }
 }
