@@ -3,14 +3,28 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import {CommonsModule} from "./commons/commons.module";
+import {ServicesModule} from "./services/services.module";
+import {HttpClient} from "@angular/common/http";
+import {PipesModule} from "./pipes/pipes.module";
+
+
+
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+
+
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    CommonsModule,
+    ServicesModule,
+    PipesModule
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]

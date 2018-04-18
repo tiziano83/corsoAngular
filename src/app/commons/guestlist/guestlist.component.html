@@ -1,0 +1,10 @@
+<h2> guest list</h2>
+
+<div fxLayout="column" fxLayout.xs="row" fxLayoutGap="50px">
+<app-simple-guest
+  *ngFor="let guest of guests; let i = index;"
+  [guest]="guest"
+  [index]="i"
+  (delete)="onClick(guest.id)"
+></app-simple-guest>
+</div>

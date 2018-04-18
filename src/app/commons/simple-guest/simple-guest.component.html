@@ -1,0 +1,17 @@
+<mat-card
+  appHighlightOnClick
+  [highlight]="showDetails"
+  (click)="toggleDetails()"
+  appCollapseOnClick
+  [index]="index"
+>
+  <mat-card-title >{{"guest # "+(guest.id | slice: 0 : 5)}}</mat-card-title>
+  <mat-card-content [id]="'guest-description-'+index"
+                     >
+  <p>nome {{guest.firtsName}}</p>
+  <p>cognome {{guest.lastName}}</p>
+  <p>company : {{guest.company}}</p>
+    <p>data di nascita : {{guest.birthDate | extendData}}</p>
+  <app-delete-guest-button (delete)="onClick()"></app-delete-guest-button>
+  </mat-card-content>
+</mat-card>
