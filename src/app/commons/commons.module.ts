@@ -3,7 +3,10 @@ import { CommonModule } from '@angular/common';
 import { GuestlistComponent } from './guestlist/guestlist.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { SimpleGuestComponent } from './simple-guest/simple-guest.component';
-import {MatButtonModule, MatCardModule, MatDialogModule} from "@angular/material";
+import {
+  MatButtonModule, MatCardModule, MatDialogModule, MatFormFieldModule, MatInputModule,
+  MatSelectModule
+} from "@angular/material";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {DirectivesModule} from "../directives/directives.module";
 import { AddGuestButtonComponent } from './add-guest-button/add-guest-button.component';
@@ -33,7 +36,10 @@ const components = [
     DirectivesModule,
     MatButtonModule,
     PipesModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   exports:[...components],
   declarations: [...components],

@@ -1,31 +1,55 @@
 <h1>Add Guest</h1>
 <form [formGroup]="guestForm" (ngSubmit)="addGuest(guestForm)">
-  <input
-    formControlName="firtsName"
-    name="firtsName"
-    id="firtsName"/>
+  <div [formGroup]="guestForm.get('name')">
+  <mat-form-field>
+    <input matInput
+           placeholder="firstName"
+           formControlName="firtsName"
+           required
+           id="firtsName"/>
+  </mat-form-field>
+  <mat-form-field>
+
+    <input matInput
+           placeholder="lastName"
+
+           id="lastName"
+           required
+           formControlName="lastName">
+  </mat-form-field>
+  </div>
+
+  <mat-form-field>
+    <mat-select placeholder="company"
+
+                name="company"
+                id="company"
+                formControlName="company">
+      <mat-option value=""></mat-option>
+      <mat-option *ngFor="let company of companies" [value]="company">{{company}}</mat-option>
+    </mat-select>
+  </mat-form-field>
 
 
-
-  <input
-
-    name="lastName"
-    id="lastName"
-    required
-    formControlName="lastName">
+  <div formArrayName="phoneNumbers"
+  *ngFor="let item of guestForm.get('phoneNumbers').controls; let i = index;">
+    <mat-form-field [formGroupName]="i">
+      <input matInput
+             placeholder="phoneNumbers"
 
 
-  <select
+             required
+             id="phoneNumber"/>
+    </mat-form-field>
+  </div>
 
-    name="company"
-    id="company"
-    formControlName="company">
-    <option   value=""></option>
-    <option *ngFor="let company of companies" [value]="company">{{company}}</option>
-  </select>
+  <button (click)="addPhoneNumber()">aggiungi telefono</button>
 
   <button type="submit" [disabled]="!guestForm.valid">Salva</button>
 
 </form>
 
 {{guestForm.value | json}}
+
+
+
