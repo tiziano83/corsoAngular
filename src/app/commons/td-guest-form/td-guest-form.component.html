@@ -1,0 +1,33 @@
+
+<h1>add guest</h1>
+
+<form #guestForm="ngForm" (ngSubmit)="addGuest(guestForm)">
+  <input #firstName="ngModel"
+    name="firtsName"
+    id="firtsName"
+    required
+    [(ngModel)]="guest.firtsName">
+<p *ngIf="!firstName.valid && firstName.dirty" >FirstName is required</p>
+  <input
+    #lastName="ngModel"
+    name="lastName"
+    id="lastName"
+    required
+    [(ngModel)]="guest.lastName">
+
+  <p *ngIf="!lastName.valid && lastName.dirty" >LastName is required</p>
+
+
+  <select
+
+    name="company"
+    id="company"
+    [(ngModel)]="guest.company">
+    <option   value=""></option>
+    <option *ngFor="let company of companies" [value]="company">{{company}}</option>
+  </select>
+
+  <button type="submit" [disabled]="!guestForm.valid">Salva</button>
+  {{guest | json}}
+  <p>form valido : {{guestForm.valid }}</p>
+</form>

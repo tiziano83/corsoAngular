@@ -1,5 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
+import {iGuest} from "../../models/iguest.interface";
 
 @Component({
   selector: 'app-simple-dialog',
@@ -20,6 +21,12 @@ export class SimpleDialogComponent implements OnInit {
 
 
   ngOnInit() {
+  }
+
+  onNewGuestListener(guest: iGuest){
+    //console.log('guest',guest);
+    this.dialogRef.close(guest);
+
   }
 
 }

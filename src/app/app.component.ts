@@ -108,8 +108,11 @@ export class AppComponent {
      // data: { name: this.name, animal: this.animal }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result:iGuest) => {
+
       console.log('The dialog was closed');
+      if(result)
+        this.guestService.post(result).subscribe((res)=> {this.guests = res});
       //this.animal = result;
     });
   }

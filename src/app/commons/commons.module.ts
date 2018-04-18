@@ -10,12 +10,18 @@ import { AddGuestButtonComponent } from './add-guest-button/add-guest-button.com
 import { DeleteGuestButtonComponent } from './delete-guest-button/delete-guest-button.component';
 import {PipesModule} from "../pipes/pipes.module";
 import { SimpleDialogComponent } from './simple-dialog/simple-dialog.component';
+import { TdGuestFormComponent } from './td-guest-form/td-guest-form.component';
+import { DdGuestFormComponent } from './dd-guest-form/dd-guest-form.component';
 
 const components = [
   GuestlistComponent,
   SimpleGuestComponent,
   AddGuestButtonComponent,
-  SimpleDialogComponent
+  SimpleDialogComponent,
+  DeleteGuestButtonComponent,
+  SimpleDialogComponent,
+  TdGuestFormComponent,
+  DdGuestFormComponent
 ]
 
 @NgModule({
@@ -29,7 +35,7 @@ const components = [
     PipesModule
   ],
   exports:[...components],
-  declarations: [...components, DeleteGuestButtonComponent, SimpleDialogComponent],
+  declarations: [...components],
   entryComponents:[SimpleDialogComponent]
 })
 export class CommonsModule { }
