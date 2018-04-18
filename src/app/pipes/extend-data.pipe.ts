@@ -5,11 +5,20 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ExtendDataPipe implements PipeTransform {
 
-  transform(value: string, args?: any): Date {
+  transform(value: string, args?: 't' | 'd'): String {
     if(!value){
       return null;
     }
-    return new Date(value);
+    switch (args) {
+      case 't': default : {
+        return new Date(value).toDateString();
+
+    }
+      case 'd' :{
+        return new Date().toLocaleTimeString();
+      }
+    }
+
   }
 
 }

@@ -11,7 +11,7 @@
   <p>nome {{guest.firtsName}}</p>
   <p>cognome {{guest.lastName}}</p>
   <p>company : {{guest.company}}</p>
-    <p>data di nascita : {{guest.birthDate | extendData}}</p>
+    <p>data di nascita : {{guest.birthDate | extendData : 'd'}}</p>
   <app-delete-guest-button (delete)="onClick()"></app-delete-guest-button>
   </mat-card-content>
 </mat-card>
