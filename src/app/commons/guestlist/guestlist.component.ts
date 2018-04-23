@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {iGuest} from "../../models/iguest.interface";
+import {Router} from "@angular/router";
 
 
 
@@ -17,7 +18,7 @@ export class GuestlistComponent implements OnInit {
 
   @Output() delete = new EventEmitter<any>();
 
-  constructor() { }
+  constructor(private router : Router) { }
 
   ngOnInit() {
   }
@@ -25,7 +26,10 @@ export class GuestlistComponent implements OnInit {
     onClick(id :number){
       this.delete.emit(id);
     }
+   showGuestDetails(guest:iGuest) {
+     console.log('guest', guest);
+     this.router.navigate(['user', guest.id]);
 
 
-
+   }
 }

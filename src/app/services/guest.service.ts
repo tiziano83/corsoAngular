@@ -26,6 +26,10 @@ export class GuestService {
 
   }
 
+  get(guestId){
+    return this.httpClient.get(`${this.url}/${guestId}`).map((res:iGuest)=>res);
+  }
+
   index():Observable<iGuest[]>{
 
 

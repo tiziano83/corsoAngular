@@ -1,0 +1,8 @@
+
+<h1>{{title}}</h1>
+{{guests | json}}
+<p>total operator{{guests?.length}}</p><!--mettendo il punto interrogativo se il valore è presente lo stampa altrimenti no-->
+<div>
+  <app-guestlist (delete)="onDeleteGuestListener($event)"  [guests]="guestsObs | async"></app-guestlist>
+  <app-add-guest-button  (add)="onAddGuestListener($event)"></app-add-guest-button>
+</div>

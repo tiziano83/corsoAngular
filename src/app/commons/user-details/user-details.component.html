@@ -1,0 +1,11 @@
+<p>
+  guest id : {{id_user}}
+  guest id : {{guest?.id}}
+  <!--elvis operator(punto interrogativo) serve per farsi che il flusso aspetti la valorizzazione dell'attributo senza dare l'errore -->
+</p>
+<div id="details">  {{guest | json}}</div>
+
+<div id="userList">
+  <app-guest-simple-list></app-guest-simple-list>
+
+</div>
