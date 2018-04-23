@@ -3,6 +3,7 @@ import {MatDialog} from "@angular/material";
 import {GuestService} from "../../services/guest.service";
 import {iGuest} from "../../models/iguest.interface";
 import {SimpleDialogComponent} from "../../commons/simple-dialog/simple-dialog.component";
+import {PubSubService} from "../../services/pub-sub.service";
 
 @Component({
   selector: 'app-home',
@@ -17,23 +18,28 @@ export class HomeComponent {
 
   //fakeGuest = this.guestService.index();
 
-  title = 'Guess';
+  title = 'Guest';
   info = {
     nome: 'tiziano',
     birthdate: new Date('05/06/1983'),
   };
 
-  constructor(private readonly guestService: GuestService,private dialog : MatDialog) {
+  constructor(private readonly guestService: GuestService,
+              private dialog : MatDialog,
+              private pubSub:PubSubService) {
     const hi = 'HI';
     this.title = `${hi} ${this.title}`;
     this.printlet();
     this.destruct();
     this.arrow()();
 
-    this.guestService.index().subscribe((res) => {
-      //console.log("Sono la risposta di guest dal server: ", res);
-      this.guests = res;
-    })
+
+    this.getGuests();
+    this.pubSub.subscribe('refresh',()=>{
+      console.log('====>reload');
+      this.getGuests(true);
+    });
+
   }
 
   printlet() {
@@ -113,6 +119,13 @@ export class HomeComponent {
         this.guestService.post(result).subscribe((res)=> {this.guests = res});
       //this.animal = result;
     });
+  }
+
+  getGuests(reload=false){
+    this.guestService.index(reload).subscribe((res) => {
+      //console.log("Sono la risposta di guest dal server: ", res);
+      this.guests = res;
+    })
   }
 
 }

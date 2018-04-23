@@ -4,5 +4,6 @@ export interface iGuest{
   lastName : string;
   company? : string;
   birthDate? : string;
+  urlVideo?:string
 
 }

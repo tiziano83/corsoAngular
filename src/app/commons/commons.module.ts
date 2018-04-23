@@ -17,9 +17,9 @@ import { TdGuestFormComponent } from './td-guest-form/td-guest-form.component';
 import { DdGuestFormComponent } from './dd-guest-form/dd-guest-form.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { UserDetailsComponent } from './user-details/user-details.component';
 import {RouterModule} from "@angular/router";
 import { GuestSimpleListComponent } from './guest-simple-list/guest-simple-list.component';
+
 
 const components = [
   GuestlistComponent,
@@ -32,7 +32,6 @@ const components = [
   DdGuestFormComponent,
   HeaderComponent,
   FooterComponent,
-  UserDetailsComponent,
   GuestSimpleListComponent
 ]
 

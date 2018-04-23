@@ -5,6 +5,8 @@ import {iGuest} from "../../models/iguest.interface";
 
 import {Observable} from "rxjs/Observable";
 import {Observer} from "rxjs/Observer";
+import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
+import {PubSubService} from "../../services/pub-sub.service";
 
 @Component({
   selector: 'app-user-details',
@@ -14,12 +16,14 @@ import {Observer} from "rxjs/Observer";
 export class UserDetailsComponent implements OnInit {
   id_user;
   guest : iGuest;
-
+  urlVideo : SafeResourceUrl;
   observer :Observer<any>;
 
   constructor(
     private route : ActivatedRoute,
-    private guestService : GuestService
+    private guestService : GuestService,
+    private domSanitizer:DomSanitizer,
+    private pubSub : PubSubService
   ) { }
 
   ngOnInit() {
@@ -28,28 +32,31 @@ export class UserDetailsComponent implements OnInit {
       console.log(params);
       this.id_user = params.id_user;
        //chiamata a medotodo promise
-      let p = this.getGuest(this.id_user);
+      this.getGuest(this.id_user);
 
-      p.then((g:iGuest)=>{
-        this.guest = g;
-      });
-      //la promise una volta instanziata torna sempre lo stesso risultato
+
       //l'observable può ritornare piu risultati a patto che io li intercetti
-      setTimeout(()=>{
-        p.then((g:iGuest)=>{
-          console.log('richiamo la promise',g);
-        })
-      },3000)
 
+/*
       //chiamata a metodo observable
       this.getGuestObs(this.id_user).subscribe((user)=>{
         this.guest = user;
         //esempio di come si puo richiamare una promise all'interno di un observer
         p.then((g:iGuest)=>{
           this.guest = g;
+          this.urlVideo=this.domSanitizer.bypassSecurityTrustResourceUrl(
+            `https://www.youtube.com/embed/${this.guest.urlVideo}`);
+          console.log('urlVideo',this.urlVideo);
         })
       })
 
+
+*/
+     this.pubSub.subscribe('refresh',()=>{
+       console.log('user detail reload');
+       if(this.id_user)
+         this.getGuest(this.id_user,true);
+     })
     });
 
 
@@ -57,15 +64,19 @@ export class UserDetailsComponent implements OnInit {
   }
 
   //ritorna una promise
-  getGuest(id){
-    return new Promise((resolve,reject)=>{
-      this.guestService.get(id).subscribe((res : iGuest)=>
-        resolve(res)
+  getGuest(id,reload=true){
+
+      this.guestService.get(id,reload).subscribe((res : iGuest)=>{
+        this.guest = res;
+        this.urlVideo = this.domSanitizer.bypassSecurityTrustResourceUrl(
+          `https://www.youtube.com/embed/${res.urlVideo}`
+          )
+      }
 
       );
-    })
 
 }
+
 //ritorna un observable
   getGuestObs(id) : Observable<iGuest>{
     return new Observable(

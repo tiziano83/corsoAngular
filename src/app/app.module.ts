@@ -8,9 +8,11 @@ import {ServicesModule} from "./services/services.module";
 import {PipesModule} from "./pipes/pipes.module";
 import {MatDialogModule} from "@angular/material";
 import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-browser/animations";
-import { HomeComponent } from './pages/home/home.component';
-import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+
 import {router} from "./app.routing";
+import {PageNotFoundModule} from "./pages/page-not-found/page-not-found.module";
+import {UserDetailsModule} from "./pages/user-details/user-details.module";
+import {HomeModule} from "./pages/home/home.module";
 
 
 
@@ -19,10 +21,6 @@ import {router} from "./app.routing";
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    PageNotFoundComponent,
-
-
   ],
   imports: [
     BrowserModule,
@@ -32,6 +30,7 @@ import {router} from "./app.routing";
     MatDialogModule,
     BrowserAnimationsModule,
     NoopAnimationsModule,
+    PageNotFoundModule,
     router
   ],
   providers: [],
