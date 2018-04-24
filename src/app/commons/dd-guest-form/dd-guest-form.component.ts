@@ -100,7 +100,7 @@ export class DdGuestFormComponent implements OnInit {
     }
   }
 
-  private addPhoneNumber(){
+  public addPhoneNumber(){
     const numbers = <FormArray>this.guestForm.get('phoneNumbers');
     numbers.push(this.addPhoneNumberControl());
   }

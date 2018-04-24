@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material";
 import {GuestService} from "../../services/guest.service";
 import {iGuest} from "../../models/iguest.interface";
 import {SimpleDialogComponent} from "../../commons/simple-dialog/simple-dialog.component";
 import {PubSubService} from "../../services/pub-sub.service";
+import {IUser, UserService} from "../../services/user.service";
 
 @Component({
   selector: 'app-home',
@@ -14,6 +15,7 @@ export class HomeComponent {
 
   guests: iGuest[];
   guestsObs = this.guestService.index().do(console.log);
+  user: IUser;
 
 
   //fakeGuest = this.guestService.index();
@@ -25,17 +27,23 @@ export class HomeComponent {
   };
 
   constructor(private readonly guestService: GuestService,
-              private dialog : MatDialog,
-              private pubSub:PubSubService) {
+              private dialog: MatDialog,
+              private pubSub: PubSubService,
+              private userService: UserService) {
     const hi = 'HI';
-    this.title = `${hi} ${this.title}`;
+    this.userService.getUser$().subscribe(
+      (r) => {
+        this.user = r;
+        this.title = `${hi} ${r.name}`;
+      })
+
     this.printlet();
     this.destruct();
     this.arrow()();
 
 
     this.getGuests();
-    this.pubSub.subscribe('refresh',()=>{
+    this.pubSub.subscribe('refresh', () => {
       console.log('====>reload');
       this.getGuests(true);
     });
@@ -92,8 +100,11 @@ export class HomeComponent {
 
        */
   }
+
   onDeleteGuestListener(args: string) {
-    this.guestService.deleteById(args).subscribe((res)=> {this.guests = res});
+    this.guestService.deleteById(args).subscribe((res) => {
+      this.guests = res
+    });
     // this.fakeGuest = this.guestService.deleteById(args);
   }
 
@@ -112,16 +123,18 @@ export class HomeComponent {
       // data: { name: this.name, animal: this.animal }
     });
 
-    dialogRef.afterClosed().subscribe((result:iGuest) => {
+    dialogRef.afterClosed().subscribe((result: iGuest) => {
 
       console.log('The dialog was closed');
-      if(result)
-        this.guestService.post(result).subscribe((res)=> {this.guests = res});
+      if (result)
+        this.guestService.post(result).subscribe((res) => {
+          this.guests = res
+        });
       //this.animal = result;
     });
   }
 
-  getGuests(reload=false){
+  getGuests(reload = false) {
     this.guestService.index(reload).subscribe((res) => {
       //console.log("Sono la risposta di guest dal server: ", res);
       this.guests = res;

@@ -19,6 +19,8 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import {RouterModule} from "@angular/router";
 import { GuestSimpleListComponent } from './guest-simple-list/guest-simple-list.component';
+import { AuthManagerComponent } from './auth-manager/auth-manager.component';
+import { CardComponent } from './card/card.component';
 
 
 const components = [
@@ -32,7 +34,9 @@ const components = [
   DdGuestFormComponent,
   HeaderComponent,
   FooterComponent,
-  GuestSimpleListComponent
+  GuestSimpleListComponent,
+  AuthManagerComponent,
+  CardComponent
 ]
 
 @NgModule({

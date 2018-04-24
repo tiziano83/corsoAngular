@@ -1,9 +1,18 @@
+<h1 *ngIf="!user?.logged">Loggati</h1>
+<h1 *ngIf="user?.logged">{{title}}</h1>
 
-<h1>{{title}}</h1>
+<hr>
+
+<h1 *ngIf="!user?.logged; else logged">Loggati</h1>
+<ng-template #logged>
+  <h1 >{{title}}</h1>
+</ng-template>
+
 {{guests | json}}
 <p>total operator{{guests?.length}}</p><!--mettendo il punto interrogativo se il valore è presente lo stampa altrimenti no-->
 <div>
-  <app-guest-simple-list></app-guest-simple-list>
+    <app-guest-simple-list></app-guest-simple-list>
+
   <app-guestlist (delete)="onDeleteGuestListener($event)"  [guests]="guestsObs | async"></app-guestlist>
   <app-add-guest-button  (add)="onAddGuestListener($event)"></app-add-guest-button>
 </div>

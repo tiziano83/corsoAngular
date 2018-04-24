@@ -1,7 +1,7 @@
-<ul>
-  <li *ngFor="let guest of guestList" >
+
+  <app-card *ngFor="let guest of guestList" routerLink="/user/{{guest.id}}">
     <a routerLink="/user/{{guest.id}}" routerLinkActive="selezionato">
     {{guest.firtsName}}
     </a>
-  </li>
-</ul>
+  </app-card>
+

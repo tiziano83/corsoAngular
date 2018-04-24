@@ -32,7 +32,7 @@
 
 
   <div formArrayName="phoneNumbers"
-  *ngFor="let item of guestForm.get('phoneNumbers').controls; let i = index;">
+  *ngFor="let item of guestForm.get('phoneNumbers')['controls']; let i = index;">
     <mat-form-field [formGroupName]="i">
       <input matInput
              placeholder="phoneNumbers"
