@@ -1,8 +1,8 @@
-<div *ngIf="user.logged">
-<span>{{user.name}}</span>
+<div *ngIf="user?.logged">
+<span>{{user?.name}}</span>
 <button (click)="logout()">logout</button>
 </div>
 
-<div *ngIf="!user.logged">
+<div *ngIf="!user?.logged">
   <button (click)="login()">login</button>
 </div>

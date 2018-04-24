@@ -16,7 +16,9 @@ export class GuestSimpleListComponent implements OnInit {
     this.getGuests();
   }
 
-  getGuests(){
+  async getGuests(){
+
+
     this.guestService.index().subscribe((res:iGuest[])=>this.guestList=res);
 
   }

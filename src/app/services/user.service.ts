@@ -23,15 +23,25 @@ export class UserService {
   }
 
 
-  login() {
-
-    this.updateStatus({
-      logged: true,
-      name: 'tiziano',
-      permissions: ['owner', 'reader', 'writer']
-    })
+  async login() {
+    let u = await this.doLogin();
+    this.updateStatus(u);
 
     this.router.navigate([],{});
+  }
+
+  doLogin():Promise<IUser>{
+    return new Promise(
+      (ok,no)=>{
+        setTimeout(()=>{
+          ok ({
+            logged: true,
+            name: 'tiziano',
+            permissions: ['owner', 'reader', 'writer']
+          })
+        },3000)
+      }
+    )
   }
 
   logout() {

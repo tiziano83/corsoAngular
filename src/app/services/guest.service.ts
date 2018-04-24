@@ -34,6 +34,7 @@ export class GuestService {
   }
 
   index(reload=false): Observable<iGuest[]> {
+
     return this.cacheService.getChache(this.url,reload).map((res:iGuest[])=>{
       this.guests = res;
       return res });
@@ -42,6 +43,10 @@ export class GuestService {
        this.guests = res;
        return res });
        */
+  }
+
+  async indexPromise(reload=false):Promise<iGuest[]>{
+   return await this.index(reload).toPromise();
   }
 
   deleteById(guestid: string) {
