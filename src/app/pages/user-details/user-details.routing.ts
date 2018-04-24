@@ -8,7 +8,8 @@ import {AuthGuard} from "../../services/auth.guard";
 
 
 export const  route:Routes = [
-  {path:'',component:UserDetailsComponent,children:
+  {path:'',component:UserDetailsComponent,
+    children:
       [
         {path:'',redirectTo:'info'},
         {
